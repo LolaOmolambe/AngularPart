@@ -3,18 +3,15 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:server": "nodemon ./backend/server.js",
-    "postinstall": "ng build --prod"
+    "start:server": "nodemon ./backend/server.js"
   },
   "private": true,
   "dependencies": {
-    "@angular/cli": "~10.0.4",
-    "@angular/compiler-cli": "~10.0.5",
     "@angular/animations": "~10.0.5",
     "@angular/cdk": "^10.1.0",
     "@angular/common": "~10.0.5",
@@ -39,7 +36,8 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1000.4",
-
+    "@angular/cli": "~10.0.4",
+    "@angular/compiler-cli": "~10.0.5",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
@@ -56,8 +54,6 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.9.5"
-  },
-  "engines": {
-    "node": "10.x"
   }
+
 }
