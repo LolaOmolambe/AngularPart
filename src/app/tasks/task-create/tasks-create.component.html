@@ -1,0 +1,20 @@
+<mat-card>
+
+
+  <form [formGroup]="form" (submit)="onSaveTask()">
+
+    <mat-form-field>
+      <input matInput type="text" formControlName="title" placeholder="Task Title">
+      <mat-error *ngIf="form.get('title').invalid">Please enter the Task title.</mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <textarea matInput rows="4" formControlName="description" placeholder="Task Decription"></textarea>
+      <mat-error *ngIf="form.get('description').invalid">Please enter Task Description</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" type="submit">Save Post</button>
+
+  </form>
+</mat-card>

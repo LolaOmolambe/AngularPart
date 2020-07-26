@@ -1,0 +1,6 @@
+{
+  "env": {
+    "MONGO_ATLAS_PW": "mongodb+srv://user:tc9cy27vhUBsO5gU@project.gyhhv.mongodb.net/user?retryWrites=true&w=majority",
+    "JWT_KEY": "secret_this_should_be_longer"
+  }
+}
