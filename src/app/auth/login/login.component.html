@@ -1,16 +1,19 @@
-<mat-card>
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+<!-- <mat-card>
+  <mat-card-content>
+  <mat-spinner *ngIf="isLoading"></mat-spinner> -->
 
-    <mat-form-field>
+  <!-- <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+    <h2> Log In</h2>
+    <mat-form-field class="full-width-input">
       <input matInput name="email"
       ngModel type="email" placeholder="E-Mail"
       #emailInput="ngModel" required email>
+
       <mat-error *ngIf="emailInput.invalid">
         Please enter a valid email.</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="full-width-input">
       <input type="password" name="password"
       ngModel matInput placeholder="Password"
        #passwordInput="ngModel" required>
@@ -18,7 +21,95 @@
         Please enter a valid password.</mat-error>
     </mat-form-field>
 
-    <button mat-raised-button color="accent"
+    <button mat-raised-button color="primary"
     type="submit" *ngIf="!isLoading">Login</button>
   </form>
-</mat-card>
+</mat-card-content>
+</mat-card> -->
+
+
+<div id="login-page-full">
+  <div id="login-full-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="login-box">
+            <div id="login-box-holder">
+              <div class="row">
+                <div class="col-xs-12">
+                  <header id="login-header">
+                    <div id="login-logo">
+                      <img src="../../../assets/images/Worky.png" alt="" />
+                      <!-- <img src="./assets/images/GIGLogin.png" alt="" /> -->
+                      <!-- <img src="./assets/images/GIGLoginLine.png" alt="" /> -->
+                    </div>
+                  </header>
+
+                  <div id="login-box-inner" class="ngdialog-theme-default">
+                    <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+                      <div class="input-group">
+                        <span class="input-group-addon"
+                          ><i class="fa fa-user"></i
+                        ></span>
+                        <input
+                          class="form-control"
+                          name="email"
+                          placeholder="Email address"
+                          ngModel type="email"
+                          #emailInput="ngModel" required
+                        />
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-addon"
+                          ><i class="fa fa-key"></i
+                        ></span>
+                        <input
+                          type="password"
+                          class="form-control"
+                          placeholder="Password"
+                         name="password"
+                          ngModel
+                          #passwordInput="ngModel" required
+                        />
+                      </div>
+
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <a href="./app/app.component.html"
+                            ><button
+                              type="submit"
+                              class="btn btn-danger col-xs-12"
+                            >
+                              Login
+                            </button></a
+                          >
+                          <div
+                            style="
+                              margin-top: 60;
+                              text-align: center;
+                              font-weight: 700;
+                              color: red;
+                            "
+                          >
+
+                          </div>
+                          <p class="login-wrapper-footer-text">Don't have an account?
+                            <a mat-button color="primary" routerLink="/signup"
+                            > Sign Up</a>
+                        </p>
+
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

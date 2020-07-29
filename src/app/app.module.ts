@@ -15,12 +15,15 @@ import {AuthModule} from './auth/auth.module';
 
 import {AuthInterceptor} from './auth/auth-interceptor';
 import { TaskCreateComponent } from "./tasks/task-create/tasks-create.component";
+import {ErrorInterceptor} from './error-interceptor';
+import {ErrorComponent} from '../error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    TaskCreateComponent
+    TaskCreateComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -34,8 +37,10 @@ import { TaskCreateComponent } from "./tasks/task-create/tasks-create.component"
     AuthModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent]
 })
 export class AppModule { }

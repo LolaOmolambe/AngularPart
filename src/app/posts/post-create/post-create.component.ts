@@ -1,10 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from "@angular/router";
-
+import { Subscription } from "rxjs";
 import { PostsService } from "../posts.service";
 import { Post } from "../post.model";
 import { mimeType } from "./mime-type.validator";
+import { AuthService } from '../../auth/auth.service';
+
 
 @Component({
   selector: "app-post-create",
@@ -20,22 +22,30 @@ export class PostCreateComponent implements OnInit {
   imagePreview: string;
   private mode = "create";
   private postId: string;
+  private authStatusSub: Subscription;
 
   constructor(
     public postsService: PostsService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private authService: AuthService
+
   ) {}
 
   ngOnInit() {
+    this.authStatusSub = this.authService
+    .getAuthStatusListener()
+    .subscribe(authStatus => {
+      this.isLoading = false;
+    });
     this.form = new FormGroup({
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
       }),
-      content: new FormControl(null, { validators: [Validators.required] }),
-      image: new FormControl(null, {
-        validators: [Validators.required],
-        asyncValidators: [mimeType]
-      })
+      content: new FormControl(null, { validators: [Validators.required] })
+      // image: new FormControl(null, {
+      //   validators: [Validators.required],
+      //   asyncValidators: [mimeType]
+      // })
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has("postId")) {
@@ -48,13 +58,13 @@ export class PostCreateComponent implements OnInit {
             id: postData._id,
             title: postData.title,
             content: postData.content,
-            imagePath: postData.imagePath,
+            // imagePath: postData.imagePath,
             creator: postData.creator
           };
           this.form.setValue({
             title: this.post.title,
-            content: this.post.content,
-            image: this.post.imagePath
+            content: this.post.content
+            // image: this.post.imagePath
           });
         });
       } else {
@@ -81,19 +91,26 @@ export class PostCreateComponent implements OnInit {
     }
     this.isLoading = true;
     if (this.mode === "create") {
+      console.log(this.form.value.title);
+      console.log(this.form.value.content);
+
       this.postsService.addPost(
         this.form.value.title,
-        this.form.value.content,
-        this.form.value.image
+        this.form.value.content
+
       );
     } else {
       this.postsService.updatePost(
         this.postId,
         this.form.value.title,
-        this.form.value.content,
-        this.form.value.image
+        this.form.value.content
+
       );
     }
     this.form.reset();
+  }
+
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
   }
 }

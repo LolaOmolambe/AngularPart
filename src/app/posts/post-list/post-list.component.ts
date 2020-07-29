@@ -62,8 +62,11 @@ constructor(public postsService: PostsService, private authService: AuthService)
   }
 
   onDelete(postId: string) {
+    this.isLoading = true;
     this.postsService.deletePost(postId).subscribe(() => {
       this.postsService.getPosts(this.postsPerPage, this.currentPage);
+    }, () => {
+      this.isLoading = false;
     });
   }
 }
