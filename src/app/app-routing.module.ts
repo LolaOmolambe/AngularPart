@@ -11,6 +11,7 @@ import {AuthGuard} from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'postlist', component: PostListComponent, canActivate: [AuthGuard] },
   { path: 'create', component: PostCreateComponent, canActivate: [AuthGuard] },
