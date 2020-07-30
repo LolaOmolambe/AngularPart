@@ -4,46 +4,47 @@ import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 
+import { environment } from "../../environments/environment";
 import { Post } from "./post.model";
-import {environment} from '../../environments/environment';
 
 const BACKEND_URL = environment.apiUrl + "/posts/";
 
 @Injectable({ providedIn: "root" })
 export class PostsService {
   private posts: Post[] = [];
-  private postsUpdated = new Subject<{posts: Post[]; postCount: number}>();
+  private postsUpdated = new Subject<{ posts: Post[]; postCount: number }>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
   getPosts(postsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
     this.http
-      .get<{ message: string; posts: any , maxPosts: number}>(
-        BACKEND_URL + queryParams)
+      .get<{ message: string; posts: any; maxPosts: number }>(
+        BACKEND_URL + queryParams
+      )
       .pipe(
         map(postData => {
           return {
             posts: postData.posts.map(post => {
-            return {
-              title: post.title,
-              content: post.content,
-              id: post._id,
-              // imagePath: post.imagePath,
-              creator:post.creator
-            };
-          }),
-          maxPosts: postData.maxPosts
-        };
+              return {
+                title: post.title,
+                content: post.content,
+                id: post._id,
+                imagePath: post.imagePath,
+                creator: post.creator,
+                status: post.status
+              };
+            }),
+            maxPosts: postData.maxPosts
+          };
         })
       )
-      .subscribe(transformedPostsData => {
-        console.log(transformedPostsData);
-        this.posts = transformedPostsData.posts;
+      .subscribe(transformedPostData => {
+        this.posts = transformedPostData.posts;
         this.postsUpdated.next({
           posts: [...this.posts],
-          postCount: transformedPostsData.maxPosts
-         } );
+          postCount: transformedPostData.maxPosts
+        });
       });
   }
 
@@ -52,61 +53,64 @@ export class PostsService {
   }
 
   getPost(id: string) {
-    return this.http.get<{ _id: string;
-      title: string; content: string;
-      //  imagePath: string;
-       creator: string
-      }>(
-      BACKEND_URL + id
-    );
+    return this.http.get<{
+      _id: string;
+      title: string;
+      content: string;
+      imagePath: string;
+      creator: string;
+      status: string
+    }>(BACKEND_URL + id);
   }
 
-  addPost(title: string, content: string) {
-    console.log("here ", title);
-    console.log("heredj ", content);
+  addPost(title: string, content: string, status: string) {
     const postData = new FormData();
-
     postData.append("title", title);
     postData.append("content", content);
-    console.log(postData);
-
-
-    
+    let reydb : Post | FormData;
+    reydb = {
+      title: title,
+      content: content,
+      id: null,
+      creator: null,
+      status: status
+    }
+    console.log(reydb);
+    //postData.append("image", image, title);
     this.http
       .post<{ message: string; post: Post }>(
         BACKEND_URL,
-        postData
+        reydb
       )
       .subscribe(responseData => {
-
         this.router.navigate(["/"]);
       });
   }
 
-  updatePost(id: string, title: string, content: string
-    // , image: File | string
-    ) {
+  updatePost(id: string, title: string, content: string, status: string) {
     let postData: Post | FormData;
     postData = {
-      id: id,
-      title: title,
-      content: content,
-      // imagePath: image,
-      creator : null
-    };
+          id: id,
+          title: title,
+          content: content,
+          //imagePath: image,
+          creator: null,
+          status: status
+        };
+        console.log(postData)
     // if (typeof image === "object") {
     //   postData = new FormData();
     //   postData.append("id", id);
     //   postData.append("title", title);
     //   postData.append("content", content);
-    //   // postData.append("image", image, title);
+    //   //postData.append("image", image, title);
     // } else {
     //   postData = {
     //     id: id,
     //     title: title,
     //     content: content,
-    //     // imagePath: image,
-    //     creator : null
+    //     //imagePath: image,
+    //     creator: null
     //   };
     // }
     this.http
@@ -117,7 +121,6 @@ export class PostsService {
   }
 
   deletePost(postId: string) {
-    return this.http
-      .delete(BACKEND_URL + postId);
+    return this.http.delete(BACKEND_URL + postId);
   }
 }

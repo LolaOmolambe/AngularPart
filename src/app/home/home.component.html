@@ -1,0 +1,33 @@
+<section class="view intro-2 rgba-gradient">
+  <div class="full-bg-img">
+    <div class="container flex-center">
+      <div class="row flex-center pt-5 mt-3">
+        <div class="col-md-6 text-center text-md-left margins">
+          <div class="white-text">
+            <h1 class="h1-responsive wow fadeInLeft" data-wow-delay="0.3s">Get Productive with Our Task Manager </h1>
+            <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+            <h3 class="wow fadeInLeft" data-wow-delay="0.3s">From the small stuff to the big picture,
+              We help organize everything for better productivity
+              .</h3>
+            <br>
+            <a style="margin:7px;" *ngIf="!userIsAuthenticated" class="btn btn-info" routerLink="/login">Login In
+            </a>
+            <a style="margin:7px;" *ngIf="!userIsAuthenticated" class="btn btn-info" routerLink="/signup">Sign Up</a>
+            <a style="margin:7px;" *ngIf="userIsAuthenticated" class="btn btn-info"
+              routerLink="/postlist">View Tasks</a>
+            <a style="margin:7px;" *ngIf="userIsAuthenticated" class="btn btn-info " routerLink="/create">Add Task</a>
+            <!-- <a mdbBtn color="white" outline="true" class="wow fadeInLeft" data-wow-delay="0.3s">Learn more</a>
+            <a mdbBtn color="white" outline="true" class="wow fadeInLeft" data-wow-delay="0.3s">Download
+
+            </a> -->
+          </div>
+        </div>
+
+        <div class="col-md-6 wow fadeInRight d-flex justify-content-center" data-wow-delay="0.3s">
+          <img src="https://mdbootstrap.com/img/Mockups/Transparent/Small/iphone-admin.png" alt=""
+            class="img-responsive">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

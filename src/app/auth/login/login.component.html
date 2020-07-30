@@ -2,7 +2,7 @@
   <mat-card-content>
   <mat-spinner *ngIf="isLoading"></mat-spinner> -->
 
-  <!-- <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+<!-- <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
     <h2> Log In</h2>
     <mat-form-field class="full-width-input">
       <input matInput name="email"
@@ -27,89 +27,32 @@
 </mat-card-content>
 </mat-card> -->
 
+<!--  Request me for a signup form or any type of help  -->
+<div class="login-form">
+  <mat-spinner *ngIf="isLoading"></mat-spinner> -->
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+    <div class="avatar"><i class="material-icons">&#xE7FF;</i></div>
+    <h4 class="modal-title">Login to Your Account</h4>
+    <div class="form-group">
+      <input type="email" ngModel name="email" #emailInput="ngModel" class="form-control" placeholder="Email"
+        required="required">
+      <!-- <mat-error *ngIf="emailInput.invalid">
+              Please enter a valid email.</mat-error> -->
 
-<div id="login-page-full">
-  <div id="login-full-wrapper">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <div id="login-box">
-            <div id="login-box-holder">
-              <div class="row">
-                <div class="col-xs-12">
-                  <header id="login-header">
-                    <div id="login-logo">
-                      <img src="../../../assets/images/Worky.png" alt="" />
-                      <!-- <img src="./assets/images/GIGLogin.png" alt="" /> -->
-                      <!-- <img src="./assets/images/GIGLoginLine.png" alt="" /> -->
-                    </div>
-                  </header>
-
-                  <div id="login-box-inner" class="ngdialog-theme-default">
-                    <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
-                      <div class="input-group">
-                        <span class="input-group-addon"
-                          ><i class="fa fa-user"></i
-                        ></span>
-                        <input
-                          class="form-control"
-                          name="email"
-                          placeholder="Email address"
-                          ngModel type="email"
-                          #emailInput="ngModel" required
-                        />
-                      </div>
-                      <div class="input-group">
-                        <span class="input-group-addon"
-                          ><i class="fa fa-key"></i
-                        ></span>
-                        <input
-                          type="password"
-                          class="form-control"
-                          placeholder="Password"
-                         name="password"
-                          ngModel
-                          #passwordInput="ngModel" required
-                        />
-                      </div>
-
-                      <div class="row">
-                        <div class="col-xs-12">
-                          <a href="./app/app.component.html"
-                            ><button
-                              type="submit"
-                              class="btn btn-danger col-xs-12"
-                            >
-                              Login
-                            </button></a
-                          >
-                          <div
-                            style="
-                              margin-top: 60;
-                              text-align: center;
-                              font-weight: 700;
-                              color: red;
-                            "
-                          >
-
-                          </div>
-                          <p class="login-wrapper-footer-text">Don't have an account?
-                            <a mat-button color="primary" routerLink="/signup"
-                            > Sign Up</a>
-                        </p>
-
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
     </div>
+
+    <div class="form-group">
+      <input type="password" name="password" ngModel placeholder="Password" #passwordInput="ngModel"
+        class="form-control" required="required">
+      <!-- <mat-error *ngIf="passwordInput.invalid">
+              Please enter a valid password.</mat-error> -->
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block btn-lg" *ngIf="!isLoading">Login</button>
+  </form>
+  <div class="text-center small" *ngIf="!isLoading">Don't have an account?
+    <a href="/signup">Sign up</a>
+
   </div>
+
 </div>

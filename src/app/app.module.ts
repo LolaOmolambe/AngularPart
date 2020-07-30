@@ -12,18 +12,21 @@ import { AppComponent } from './app.component';
 import { PostsModule } from "./posts/posts.module";
 import {HeaderComponent} from './header/header.component';
 import {AuthModule} from './auth/auth.module';
+import { UsersModule } from "./users/user.module";
 
 import {AuthInterceptor} from './auth/auth-interceptor';
 import { TaskCreateComponent } from "./tasks/task-create/tasks-create.component";
 import {ErrorInterceptor} from './error-interceptor';
 import {ErrorComponent} from '../error/error.component';
+import {HomeComponent} from '../app/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     TaskCreateComponent,
-    ErrorComponent
+    ErrorComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import {ErrorComponent} from '../error/error.component';
     AngularMaterialModule,
     HttpClientModule,
     PostsModule,
-    AuthModule
+    AuthModule,
+    UsersModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

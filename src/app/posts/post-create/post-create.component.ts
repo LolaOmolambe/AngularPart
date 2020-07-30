@@ -41,7 +41,8 @@ export class PostCreateComponent implements OnInit {
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
       }),
-      content: new FormControl(null, { validators: [Validators.required] })
+      content: new FormControl(null, { validators: [Validators.required] }),
+      status: new FormControl(null, { validators: [Validators.required] })
       // image: new FormControl(null, {
       //   validators: [Validators.required],
       //   asyncValidators: [mimeType]
@@ -58,12 +59,14 @@ export class PostCreateComponent implements OnInit {
             id: postData._id,
             title: postData.title,
             content: postData.content,
+            status: postData.status,
             // imagePath: postData.imagePath,
             creator: postData.creator
           };
           this.form.setValue({
             title: this.post.title,
-            content: this.post.content
+            content: this.post.content,
+            status: this.post.status
             // image: this.post.imagePath
           });
         });
@@ -86,6 +89,7 @@ export class PostCreateComponent implements OnInit {
   }
 
   onSavePost() {
+    console.log("here")
     if (this.form.invalid) {
       return;
     }
@@ -93,17 +97,21 @@ export class PostCreateComponent implements OnInit {
     if (this.mode === "create") {
       console.log(this.form.value.title);
       console.log(this.form.value.content);
+      console.log(this.form.value.status);
 
       this.postsService.addPost(
         this.form.value.title,
-        this.form.value.content
+        this.form.value.content,
+        this.form.value.status
+
 
       );
     } else {
       this.postsService.updatePost(
         this.postId,
         this.form.value.title,
-        this.form.value.content
+        this.form.value.content,
+        this.form.value.status
 
       );
     }

@@ -1,5 +1,11 @@
-/* main {
+main {
   margin-top: 1rem;
-  width: 80%;
+  /* width: 80%; */
   margin: auto;
-} */
+
+  background: url("https://mdbootstrap.com/img/Photos/Others/architecture.jpg")
+    no-repeat center center;
+  background-size: cover;
+  height:  100%;
+}
+

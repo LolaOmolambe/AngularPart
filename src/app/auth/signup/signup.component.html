@@ -1,4 +1,4 @@
-<mat-card>
+<!-- <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
 
@@ -14,4 +14,33 @@
 
     <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Signup</button>
   </form>
-</mat-card>
+</mat-card> -->
+
+
+<div class="login-form">
+  <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
+    <div class="avatar"><i class="material-icons">&#xE7FF;</i></div>
+    <h4 class="modal-title">Register to Your Account</h4>
+    <div class="form-group">
+      <input name="firstName" ngModel type="text" class="form-control" placeholder="First Name"
+        #firstNameInput="ngModel" required="required">
+    </div>
+    <div class="form-group">
+      <input name="lastName" ngModel type="text" class="form-control" placeholder="Last Name" #lastNameInput="ngModel"
+        required="required">
+    </div>
+    <div class="form-group">
+      <input type="email" name="email" ngModel class="form-control" placeholder="Email" #emailInput="ngModel"
+        required="required">
+    </div>
+    <div class="form-group">
+      <input name="password" type="password" class="form-control" ngModel placeholder="Password" required="required"
+        #passwordInput="ngModel">
+    </div>
+
+    <input type="submit" class="btn btn-primary btn-block btn-lg" *ngIf="!isLoading" value="Register">
+  </form>
+  <div class="text-center small" *ngIf="!isLoading">Already have an account? <a href="/login">Login</a>
+
+  </div>
+</div>
