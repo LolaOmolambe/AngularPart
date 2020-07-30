@@ -40,7 +40,10 @@
 
     <input type="submit" class="btn btn-primary btn-block btn-lg" *ngIf="!isLoading" value="Register">
   </form>
-  <div class="text-center small" *ngIf="!isLoading">Already have an account? <a href="/login">Login</a>
+  <div class="text-center small" *ngIf="!isLoading">
+    Already have an account?
+    <a [routerLink]="['/login']"> Login</a>
+    
 
   </div>
 </div>
