@@ -4,6 +4,7 @@ import { Post } from '../post.model';
 import { PostsService } from '../posts.service';
 import { PageEvent } from '@angular/material/paginator';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-post-list',
@@ -24,6 +25,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   userId: string;
   private postsSub: Subscription;
   private authStatusSub: Subscription;
+  userIsAdmin: string;
 
   constructor(
     public postsService: PostsService,
@@ -38,6 +40,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.postsService.getPosts(this.postsPerPage, this.currentPage);
     this.userId = this.authService.getUserId();
+    this.userIsAdmin = this.authService.getRole();
     this.postsSub = this.postsService
       .getPostUpdateListener()
       .subscribe((postData: { posts: Post[]; postCount: number }) => {
@@ -51,6 +54,8 @@ export class PostListComponent implements OnInit, OnDestroy {
       .subscribe((isAuthenticated) => {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
+        this.userIsAdmin = this.authService.getRole();
+        console.log(this.userIsAdmin);
       });
   }
 
