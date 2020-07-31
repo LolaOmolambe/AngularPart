@@ -15,18 +15,18 @@ import {AuthModule} from './auth/auth.module';
 import { UsersModule } from "./users/user.module";
 
 import {AuthInterceptor} from './auth/auth-interceptor';
-import { TaskCreateComponent } from "./tasks/task-create/tasks-create.component";
 import {ErrorInterceptor} from './error-interceptor';
 import {ErrorComponent} from '../error/error.component';
 import {HomeComponent} from '../app/home/home.component';
+import { FooterComponent } from "./footer/footer.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    TaskCreateComponent,
     ErrorComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

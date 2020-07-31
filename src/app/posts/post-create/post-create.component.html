@@ -15,7 +15,9 @@
   </form>
 </mat-card> -->
 
-<div class="container" style="margin-top: 50px;">
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<div class="container" style="margin-top: 55px;" *ngIf="!isLoading">
 
   <div class="row">
 
@@ -24,22 +26,30 @@
       <div>
         <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
           <div class="form-group">
-           
 
-            <label for="name">Task Title</label>
-            <input formControlName="title" type="text" name="title" class="form-control" id="title" aria-describedby="nameHelp" placeholder="Enter your task title">
-            <!-- <small id="nameHelp" *ngIf="form.get('title').invalid" class="form-text text-muted">Enter your contact’s name</small> -->
+            <!-- <p class="h4 mb-4">Create Task</p> -->
 
+            <!-- <div class="form-group"> -->
+            <label for="name" class="control-label">Task Title</label>
+            <input formControlName="title" type="text" name="title" class="form-control" id="title" aria-describedby="nameHelp" placeholder="Enter task title">
+            <!-- <small id="nameHelp" class="help-block">Enter your contact’s name</small> -->
+            <!-- </div> -->
+
+            <!-- <div class="form-group"> -->
             <label for="email">Task Description</label>
             <textarea formControlName="content"  type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp"
-              placeholder="Enter task description email"></textarea>
+              placeholder="Enter task description"></textarea>
             <!-- <small id="nameHelp" *ngIf="form.get('content').invalid" class="form-text text-muted">Enter your contact’s email</small> -->
+            <!-- </div> -->
 
+            <!-- <div class="form-group"> -->
             <label for="name">Task Status</label>
             <input formControlName="status" type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter task status">
             <!-- <small id="nameHelp" *ngIf="form.get('status').invalid" class="form-text text-muted">Enter your contact’s status</small> -->
+            <!-- </div> -->
+
             <br/>
-            <button class="btn btn-primary" type="submit">Create Task</button>
+            <button class="btn btn-info btn-block" type="submit">Save Task</button>
           </div>
         </form>
 
@@ -47,4 +57,6 @@
     </div>
   </div>
 </div>
+
+
 

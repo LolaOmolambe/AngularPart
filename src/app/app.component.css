@@ -1,7 +1,7 @@
 main {
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   /* width: 80%; */
-  margin: auto;
+   margin: auto; 
 
   background: url("https://mdbootstrap.com/img/Photos/Others/architecture.jpg")
     no-repeat center center;

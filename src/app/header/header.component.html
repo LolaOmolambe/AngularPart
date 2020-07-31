@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-md bg-light navbar-light fixed-top">
+
+<nav class="navbar navbar-expand-md bg-light navbar-light fixed-top" id="header">
   <div class="container-fluid">
     <a class="navbar-brand mr-3" routerLink="/home">Work Manager</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
@@ -10,8 +11,8 @@
         <a class="nav-item nav-link active" routerLink="/home">Home</a>
         <a *ngIf="userIsAdmin === 'admin' && userIsAuthenticated" class="nav-item nav-link" routerLink="/userlist">Users</a>
         <a *ngIf="userIsAuthenticated" class="nav-item nav-link" routerLink="/postlist">Tasks</a>
-        <a *ngIf="userIsAuthenticated" class="nav-item nav-link" routerLink="/create">Create Task</a>
-        
+        <!-- <a *ngIf="userIsAuthenticated" class="nav-item nav-link" routerLink="/create">Create Task</a> -->
+
       </div>
       <div class="navbar-nav ml-auto">
         <a *ngIf="!userIsAuthenticated" class="nav-item nav-link" routerLink="/login">Login</a>

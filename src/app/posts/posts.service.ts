@@ -83,7 +83,7 @@ export class PostsService {
         reydb
       )
       .subscribe(responseData => {
-        this.router.navigate(["/"]);
+        this.router.navigate(["/postlist"]);
       });
   }
 
@@ -116,7 +116,7 @@ export class PostsService {
     this.http
       .put(BACKEND_URL + id, postData)
       .subscribe(response => {
-        this.router.navigate(["/"]);
+        this.router.navigate(["/postlist"]);
       });
   }
 

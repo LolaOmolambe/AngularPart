@@ -6,6 +6,7 @@ import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import {UserListComponent} from './users/users-list/users-list.component';
+import {UserEditComponent} from './users/users-edit/user-edit.component';
 
 import {AuthGuard} from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'create', component: PostCreateComponent, canActivate: [AuthGuard] },
   { path: 'edit/:postId', component: PostCreateComponent, canActivate: [AuthGuard] },
   { path: 'userlist', component: UserListComponent, canActivate: [AuthGuard] },
+  { path: 'useredit/:userId', component: UserEditComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: '**', redirectTo: '/home' },

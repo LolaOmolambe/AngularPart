@@ -1,57 +1,30 @@
-<!-- <mat-spinner *ngIf="isLoading"></mat-spinner>
-
-<mat-accordion *ngIf="posts.length > 0 && !isLoading" >
-  <mat-expansion-panel *ngFor="let post of posts">
-    <mat-expansion-panel-header>
-      {{post.title}}
-    </mat-expansion-panel-header>
-
-    <p>{{post.content}}</p>
-
-    <mat-action-row >
-      <a [routerLink]="['/edit', post.id]" mat-button color="primary">Edit</a>
-      <button mat-button color="warn" (click)="onDelete(post.id)">Delete</button>
-    </mat-action-row>
-     <mat-action-row *ngIf="userIsAuthenticated && userId == post.creator">
-      <a [routerLink]="['/edit', post.id]" mat-button color="primary">Edit</a>
-      <button mat-button color="warn" (click)="onDelete(post.id)">Delete</button>
-    </mat-action-row>
-
-  </mat-expansion-panel>
-
-</mat-accordion>
-<mat-paginator [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions"
-(page)="onChangedPage($event)" *ngIf="posts.length > 0"
-></mat-paginator>
-<p class="mat-body-1 info-text" *ngIf="posts.length <= 0 && !isLoading">No Posts added yet!</p> -->
 
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<div class="container" style="margin-top: 70px;">
+<div class="container" style="margin-top: 47px;" *ngIf="users.length > 0 && !isLoading">
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>#</th>
+        <th>S/N</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
-        <!-- <th></th>
-        <th></th> -->
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngFor="let user of users; let ndx = index">
 
-        <td>1</td>
+        <td>{{ndx+1}}</td>
         <td> {{ user.firstName }}</td>
         <td> {{ user.lastName }}</td>
         <td> {{ user.email }}</td>
-        <!-- <td>
-          <a *ngIf="userIsAuthenticated && userId == post.creator" [routerLink]="['/edit', post.id]" class="btn btn-primary" >Edit</a>
-
+        <td>
+          <a *ngIf="userIsAuthenticated" [routerLink]="['/useredit', user.id]" class="btn btn-primary" >Edit</a>
         </td>
         <td>
-          <button *ngIf="userIsAuthenticated && userId == post.creator" class="btn btn-danger" (click)="onDelete(post.id)">Delete</button>
-        </td> -->
+          <button *ngIf="userIsAuthenticated" class="btn btn-danger" (click)="onDelete(user.id)">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -72,6 +45,10 @@
 
     </div> -->
 </div>
+<div class="container" style="margin-top: 50px;" *ngIf="users.length <= 0">
+  <p class="mat-body-1 info-text" *ngIf="users.length <= 0 && !isLoading">No Users added yet!</p>
+</div>
+
 
 
 

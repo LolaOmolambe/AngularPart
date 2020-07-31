@@ -26,12 +26,12 @@
 <p class="mat-body-1 info-text" *ngIf="posts.length <= 0 && !isLoading">No Posts added yet!</p> -->
 
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<div class="container" style="margin-top: 50px;">
+<div class="container" style="margin-top: 53px;" *ngIf="posts.length > 0 && !isLoading" >
 
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>#</th>
+        <th>S/N</th>
         <th>Task Title</th>
         <th>Description</th>
         <th>Status</th>
@@ -40,9 +40,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let post of posts">
-
-        <td>1</td>
+      <tr *ngFor="let post of posts; let ndx = index">
+        <td>{{ndx+1}}</td>
         <td> {{ post.title }}</td>
         <td> {{ post.content }}</td>
         <td> {{ post.status }}</td>
@@ -59,9 +58,12 @@
   <mat-paginator [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions"
 (page)="onChangedPage($event)" *ngIf="posts.length > 0"
 ></mat-paginator>
-<p class="mat-body-1 info-text" *ngIf="posts.length <= 0 && !isLoading">No Posts added yet!</p>
- 
+
 </div>
+<div class="container" style="margin-top: 47px;" *ngIf="posts.length <= 0">
+  <p class="mat-body-1 info-text" *ngIf="posts.length <= 0 && !isLoading">No Tasks added yet!</p>
+</div>
+
 
 
 

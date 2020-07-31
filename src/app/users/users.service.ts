@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Router } from "@angular/router";
 
 import { UserData } from './user.model';
 import { environment } from '../../environments/environment';
@@ -16,7 +17,7 @@ export class UsersService {
     userCount: number;
   }>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getUsers(postsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
@@ -32,6 +33,7 @@ export class UsersService {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
+                id: user._id
               };
             }),
             maxUsers: userData.maxUsers,
@@ -47,7 +49,31 @@ export class UsersService {
       });
   }
 
+  getUser(id: string){
+    return this.http.get<{_id: string;
+    firstName: string; lastName: string; email: string}>(BACKEND_URL + '/getuser/' + id);
+  }
+
   getUserUpdateListener() {
     return this.usersUpdated.asObservable();
   }
+
+  updateUser(id: string, firstName: string, lastName: string) {
+    let userData : UserData | FormData;
+    userData = {
+      id: id,
+      firstName: firstName,
+      lastName: lastName,
+      email: null,
+    };
+    this.http.put(BACKEND_URL + '/edituser/' + id, userData)
+    .subscribe(response => {
+      this.router.navigate(["/userlist"])
+    })
+  }
+
+  deleteUser(userId: string) {
+    return this.http.delete(BACKEND_URL + '/deleteuser/' + userId);
+  }
+
 }

@@ -16,7 +16,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   isLoading = false;
   totalUsers = 0;
-  postsPerPage = 2;
+  postsPerPage = 5;
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
   userIsAuthenticated = false;
@@ -54,6 +54,17 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.currentPage = pageData.pageIndex + 1;
     this.postsPerPage = pageData.pageSize;
     this.usersService.getUsers(this.postsPerPage, this.currentPage);
+  }
+
+  onDelete(userId: string) {
+    this.isLoading = true;
+    this.usersService.deleteUser(userId).subscribe(
+      () => {
+        this.usersService.getUsers(this.postsPerPage, this.currentPage);
+      }, () => {
+        this.isLoading = false;
+      }
+    )
   }
 
   ngOnDestroy(): void {
