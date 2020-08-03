@@ -22,6 +22,7 @@ export class PostCreateComponent implements OnInit {
   private mode = "create";
   private postId: string;
   private authStatusSub: Subscription;
+  Status: any = ['Not Started', 'Started', 'Pending', 'Completed'];
 
   constructor(
     public postsService: PostsService,
@@ -41,10 +42,7 @@ export class PostCreateComponent implements OnInit {
       }),
       content: new FormControl(null, { validators: [Validators.required] }),
       status: new FormControl(null, { validators: [Validators.required] })
-      // image: new FormControl(null, {
-      //   validators: [Validators.required],
-      //   asyncValidators: [mimeType]
-      // })
+
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has("postId")) {
@@ -84,16 +82,10 @@ export class PostCreateComponent implements OnInit {
     this.isLoading = true;
     console.log("mode ",this.mode);
     if (this.mode === "create") {
-      console.log(this.form.value.title);
-      console.log(this.form.value.content);
-      console.log(this.form.value.status);
-
       this.postsService.addPost(
         this.form.value.title,
         this.form.value.content,
         this.form.value.status
-
-
       );
     } else {
       this.postsService.updatePost(
@@ -105,6 +97,13 @@ export class PostCreateComponent implements OnInit {
       );
     }
     this.form.reset();
+  }
+
+   // Choose city using select dropdown
+   changeStatus(e) {
+    this.form.value.status.setValue(e.target.value, {
+      onlySelf: true
+    })
   }
 
   ngOnDestroy() {

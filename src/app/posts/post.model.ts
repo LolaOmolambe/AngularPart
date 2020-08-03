@@ -4,4 +4,5 @@ export interface Post {
   content: string;
   creator: string;
   status: string;
+  // createdAt: string;
 }

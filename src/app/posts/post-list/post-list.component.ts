@@ -12,9 +12,12 @@ import { ThrowStmt } from '@angular/compiler';
   styleUrls: ['./post-list.component.css'],
 })
 export class PostListComponent implements OnInit, OnDestroy {
-  posts: Post[] = [
-    // {title:"Lola", content: "welldone"}
-  ];
+  // posts: Post[] = [
+
+  // ];
+  posts: any[] = [];
+
+  
 
   isLoading = false;
   totalPosts = 0;
@@ -43,7 +46,8 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.userIsAdmin = this.authService.getRole();
     this.postsSub = this.postsService
       .getPostUpdateListener()
-      .subscribe((postData: { posts: Post[]; postCount: number }) => {
+      .subscribe((postData: { posts: any[]; postCount: number }) => {
+        // .subscribe((postData: { posts: Post[]; postCount: number }) => {
         this.isLoading = false;
         this.posts = postData.posts;
         this.totalPosts = postData.postCount;

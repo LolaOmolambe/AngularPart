@@ -35,8 +35,10 @@
         <th>Task Title</th>
         <th>Description</th>
         <th>Status</th>
+        <th>Date Created</th>
+        <th>Date Updated</th>
         <th></th>
-        <th></th>
+        <!-- <th></th> -->
       </tr>
     </thead>
     <tbody>
@@ -45,15 +47,17 @@
         <td> {{ post.title }}</td>
         <td> {{ post.content }}</td>
         <td> {{ post.status }}</td>
+        <td>{{ post.createdAt | date:'medium'}}</td>
+        <td>{{ post.updatedAt | date: 'medium'}}</td>
         <td>
-          <a *ngIf="userIsAuthenticated && (userId == post.creator || userIsAdmin == 'admin') " [routerLink]="['/edit', post.id]"
-            class="btn btn-primary">Edit</a>
+          <a *ngIf="userIsAuthenticated && (userId == post.creator || userIsAdmin == 'admin') && post.status !== 'Completed' "
+            [routerLink]="['/edit', post.id]" class="btn btn-primary">Edit</a>
 
         </td>
-        <td>
-          <button *ngIf="userIsAuthenticated && (userId == post.creator || userIsAdmin == 'admin') " class="btn btn-danger"
-            (click)="onDelete(post.id)">Delete</button>
-        </td>
+        <!-- <td>
+          <button *ngIf="userIsAuthenticated && (userId == post.creator || userIsAdmin == 'admin') "
+            class="btn btn-danger" (click)="onDelete(post.id)">Delete</button>
+        </td> -->
       </tr>
     </tbody>
   </table>
